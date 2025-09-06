@@ -1,0 +1,26 @@
+<div class="fav-container">
+  <h3>Favoritos</h3>
+  <div *ngIf="favorites.length; else empty">
+    <div class="menu-list">
+      <div class="menu-item" *ngFor="let b of favorites">
+        <img [src]="b.image" alt="{{ b.name }}">
+        <div class="info">
+          <div class="name">{{ b.name }}</div>
+          <div class="desc">{{ b.description }}</div>
+          <div class="price">${{ b.basePrice }}</div>
+        </div>
+        <div class="actions">
+          <button class="btn ghost" (click)="toggleFavorite(b.id)">
+            <i class="bi" [ngClass]="isFav(b.id) ? 'bi-heart-fill' : 'bi-heart'"></i>
+            <span>{{ isFav(b.id) ? 'Quitar' : 'Favorito' }}</span>
+          </button>
+          <button class="btn primary" (click)="add(b)">Pedir</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #empty>
+    <p>No tenés favoritos aún.</p>
+  </ng-template>
+</div>
+

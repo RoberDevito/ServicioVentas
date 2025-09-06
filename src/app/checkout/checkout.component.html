@@ -1,0 +1,21 @@
+<div class="checkout">
+  <h2>Pagar</h2>
+  <div *ngIf="cart.cartItems.length; else empty">
+    <div class="item" *ngFor="let it of cart.cartItems">
+      <div>
+        <div class="name">{{ it.name }} x{{ it.quantity }}</div>
+        <div class="opts" *ngIf="it.options">
+          <span *ngIf="it.options.removed?.length">Sin: {{ it.options.removed.join(', ') }}</span>
+          <span *ngIf="it.options.added?.length"> | Extra: {{ it.options.added.join(', ') }}</span>
+        </div>
+      </div>
+      <div class="price">${{ it.price * it.quantity }}</div>
+    </div>
+    <div class="total">Total: ${{ cart.total }}</div>
+    <button class="pay" (click)="pagar()">Confirmar y pagar</button>
+  </div>
+  <ng-template #empty>
+    <p>Tu carrito está vacío.</p>
+  </ng-template>
+</div>
+
