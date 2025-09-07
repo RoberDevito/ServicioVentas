@@ -84,18 +84,18 @@
 .qty-mini button { width: 28px; height: 28px; border-radius: 8px; border: 1px solid #ddd; background: #fff; }
 .qty-mini span { min-width: 20px; text-align: center; font-weight: 800; font-family: 'Nunito', sans-serif; }
 
-/* Carrusel */
-/* Eliminado carrusel para enfoque de menú */
 
 /* Títulos */
 .promoTitle {
-  font-family:'Times New Roman', Times, serif;
-  color: #525252;
+  font-family: 'Barlow', sans-serif;
+  color: #37394F;
   margin-bottom: 10px;
+  font-weight: 900 ;
 }
 .categoriasTitle {
-  font-family:'Times New Roman', Times, serif;
-  color: #525252;
+  font-family: 'Barlow', sans-serif;
+  color: #37394F;
+  font-weight: 900;
 }
 
 /* Categorías */
