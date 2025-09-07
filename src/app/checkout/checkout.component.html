@@ -1,21 +1,95 @@
 <div class="checkout">
-  <h2>Pagar</h2>
-  <div *ngIf="cart.cartItems.length; else empty">
-    <div class="item" *ngFor="let it of cart.cartItems">
-      <div>
-        <div class="name">{{ it.name }} x{{ it.quantity }}</div>
-        <div class="opts" *ngIf="it.options">
-          <span *ngIf="it.options.removed?.length">Sin: {{ it.options.removed.join(', ') }}</span>
-          <span *ngIf="it.options.added?.length"> | Extra: {{ it.options.added.join(', ') }}</span>
+
+  <form #f="ngForm" (ngSubmit)="pagar()" novalidate class="flat-form">
+    <!-- Datos generales -->
+    <div class="divider"><i class="bi bi-person"></i> Datos generales</div>
+    <div class="row g-4">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="correo" class="label">Correo electrónico</label>
+          <input id="correo" name="correo" type="email" class="input-underline" placeholder="ejemplo@gmail.com" required [(ngModel)]="data.correo" />
         </div>
       </div>
-      <div class="price">${{ it.price * it.quantity }}</div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="telefono" class="label">Número de teléfono</label>
+          <input id="telefono" name="telefono" type="tel" class="input-underline" placeholder="011 15-2345-6789" required [(ngModel)]="data.telefono" />
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="nombre" class="label">Nombre y apellido</label>
+          <input id="nombre" name="nombre" type="text" class="input-underline" placeholder="Tu nombre completo" required [(ngModel)]="data.nombre" />
+        </div>
+      </div>
     </div>
-    <div class="total">Total: ${{ cart.total }}</div>
-    <button class="pay" (click)="pagar()">Confirmar y pagar</button>
-  </div>
-  <ng-template #empty>
-    <p>Tu carrito está vacío.</p>
-  </ng-template>
-</div>
 
+    <!-- Dirección -->
+    <div class="divider mt-2"><i class="bi bi-house"></i> Dirección</div>
+    <div class="row g-4">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="calle" class="label">Calle y número</label>
+          <input id="calle" name="calle" type="text" class="input-underline" placeholder="Av. Argentina 1234" required [(ngModel)]="data.direccion.calle" />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="piso" class="label">Piso y departamento</label>
+          <input id="piso" name="piso" type="text" class="input-underline" placeholder="Por ejemplo: 1B" [(ngModel)]="data.direccion.piso" />
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="colonia" class="label">Barrio</label>
+          <input id="colonia" name="colonia" type="text" class="input-underline" placeholder="Barrio" [(ngModel)]="data.direccion.colonia" />
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="ciudad" class="label">Ciudad</label>
+          <input id="ciudad" name="ciudad" type="text" class="input-underline" placeholder="Ciudad" required [(ngModel)]="data.direccion.ciudad" />
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="cp" class="label">Código postal</label>
+          <input id="cp" name="cp" type="text" class="input-underline" placeholder="5000" required [(ngModel)]="data.direccion.cp" />
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="form-group">
+          <label for="notas" class="label">Comentarios</label>
+          <textarea id="notas" name="notas" class="input-underline" rows="2" placeholder="Referencias, timbre, etc." [(ngModel)]="data.notas"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pago -->
+    <div class="divider mt-2"><i class="bi bi-wallet2"></i> Forma de pago</div>
+    <div class="row g-3 radio-list">
+      <label class="col-md-6 radio-item">
+        <input type="radio" name="formaPago" value="Efectivo" [(ngModel)]="data.formaPago" required />
+        <span class="dot"></span>
+        <span>Efectivo</span>
+      </label>
+      <label class="col-md-6 radio-item">
+        <input type="radio" name="formaPago" value="Transferencia" [(ngModel)]="data.formaPago" />
+        <span class="dot"></span>
+        <span>Transferencia</span>
+      </label>
+    </div>
+
+    <div class="row g-3" *ngIf="data.formaPago === 'Efectivo'">
+      <div class="col-md-6">
+        <div class="form-group mt-1">
+          <label for="monto" class="label">¿Con cuánto pagás?</label>
+          <input id="monto" name="monto" type="number" class="input-underline" placeholder="Ej. 1000" [(ngModel)]="data.montoEfectivo" />
+        </div>
+      </div>
+    </div>
+
+    <div class="total mt-3">Total: ${{ cart.total }}</div>
+    <button class="pay" type="submit" [disabled]="!f.form.valid">Confirmar pedido</button>
+  </form>
+</div>
