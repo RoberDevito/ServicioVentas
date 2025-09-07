@@ -16,7 +16,7 @@
 .input-underline { border: none; border-bottom: 2px solid #e5e7eb; padding: 10px 0; background: transparent; outline: none; transition: border-color .2s ease, color .2s ease; }
 .input-underline::placeholder { color:#a3a3a3; }
 .input-underline:focus { border-bottom-color: var(--brand-amber); }
-textarea.input-underline { resize: vertical; min-height: 72px; }
+textarea.input-underline { resize: vertical; }
 
 /* Radios like in checkout UIs */
 .radio-list { margin-top: 4px; }
@@ -37,3 +37,6 @@ textarea.input-underline { resize: vertical; min-height: 72px; }
 
 .pay:disabled { opacity: .6; cursor: not-allowed; }
 
+
+/* Inline error messages */
+.error { color: #d32f2f; font-size: 12px; margin-top: 6px; }
